@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Barbearia - Agendamento</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Roboto', sans-serif;
+      background: linear-gradient(135deg, #f0f0f0, #dcdcdc);
+      color: #333;
+    }
+    header {
+      background-color: #222;
+      color: #fff;
+      text-align: center;
+      padding: 50px 20px;
+    }
+    header h1 { font-size: 3rem; margin-bottom: 10px; }
+    header p { font-size: 1.2rem; }
+    main {
+      max-width: 800px;
+      margin: 40px auto;
+      padding: 20px;
+      background-color: #fff;
+      border-radius: 12px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+    }
+    h2 { text-align: center; margin-bottom: 20px; color: #222; }
+    form { display: flex; flex-direction: column; gap: 15px; }
+    label { font-weight: bold; }
+    select, input[type="date"], input[type="time"] {
+      padding: 12px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      font-size: 1rem;
+    }
+    .btn {
+      background-color: #25D366;
+      color: #fff;
+      font-size: 1.2rem;
+      padding: 15px;
+      border: none;
+      border-radius: 50px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      text-align: center;
+      text-decoration: none;
+      display: block;
+    }
+    .btn:hover { background-color: #1ebe5d; }
+    footer {
+      text-align: center;
+      padding: 20px;
+      background-color: #222;
+      color: #fff;
+      margin-top: 40px;
+    }
+    /* Calendário visual */
+    .calendar {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      gap: 5px;
+      margin-bottom: 20px;
+    }
+    .calendar div {
+      padding: 10px;
+      background-color: #eee;
+      text-align: center;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .calendar div:hover {
+      background-color: #25D366;
+      color: #fff;
+    }
+    .calendar .selected {
+      background-color: #1ebe5d;
+      color: #fff;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>Barbearia</h1>
+  <p>Agende seu horário online e fique estiloso!</p>
+</header>
+
+<main>
+  <h2>Agendamento de Serviços</h2>
+  
+  <form id="formAgendamento">
+    <label for="servico">Selecione o serviço:</label>
+    <select id="servico" required>
+      <option value="" disabled selected>Escolha um serviço</option>
+      <option value="Corte Masculino">Corte Masculino</option>
+      <option value="Barba">Barba</option>
+      <option value="Corte + Barba">Corte + Barba</option>
+      <option value="Cabelo Infantil">Cabelo Infantil</option>
+      <option value="Sobrancelha">Sobrancelha</option>
+    </select>
+
+    <label>Escolha a data:</label>
+    <input type="date" id="data" required>
+
+    <label for="horario">Escolha o horário:</label>
+    <select id="horario" required>
+      <option value="" disabled selected>Selecione o horário</option>
+      <option value="09:00">09:00</option>
+      <option value="10:00">10:00</option>
+      <option value="11:00">11:00</option>
+      <option value="13:00">13:00</option>
+      <option value="14:00">14:00</option>
+      <option value="15:00">15:00</option>
+      <option value="16:00">16:00</option>
+    </select>
+
+    <button type="submit" class="btn">Agendar pelo WhatsApp</button>
+  </form>
+</main>
+
+<footer>
+  © 2025 Barbearia - WhatsApp: (75) 98334-7724
+</footer>
+
+<script>
+  const form = document.getElementById('formAgendamento');
+
+  form.addEventListener('submit', function(e) {
+    e.preventDefault();
+    const servico = document.getElementById('servico').value;
+    const data = document.getElementById('data').value;
+    const horario = document.getElementById('horario').value;
+
+    if(!servico || !data || !horario){
+      alert('Por favor, preencha todos os campos.');
+      return;
+    }
+
+    const mensagem = `Olá! Gostaria de agendar um serviço na Barbearia:\n\nServiço: ${servico}\nData: ${data}\nHorário: ${horario}`;
+    const whatsappURL = `https://wa.me/5575983347724?text=${encodeURIComponent(mensagem)}`;
+    window.open(whatsappURL, '_blank');
+  });
+</script>
+
+</body>
+</html>
+
